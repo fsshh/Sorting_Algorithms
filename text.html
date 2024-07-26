@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Sort Visualization</title>
+    <style>
+        .container {
+            display: flex;
+            gap: 10px;
+        }
+        .box {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: lightblue;
+            border: 1px solid #000;
+            transition: transform 0.5s ease; /* Smooth transition */
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="box">5</div>
+        <div class="box">1</div>
+        <div class="box">4</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+    </div>
+    <input type="range" min="100" max="2000" value="500" id="speedRange">
+    <label for="speedRange">Speed: <span id="speedValue">500</span>ms</label>
+    <button onclick="bubbleSort()">Sort</button>
+
+    <script>
+        let speed = 500; // Initial speed in milliseconds
+
+        document.getElementById('speedRange').addEventListener('input', function() {
+            speed = this.value;
+            document.getElementById('speedValue').textContent = this.value;
+        });
+
+        function swapElements(el1, el2) {
+            return new Promise(resolve => {
+                const container = el1.parentNode;
+                container.insertBefore(el2, el1);
+                // Adjust position for visual transition
+                const transform1 = window.getComputedStyle(el1).transform;
+                const transform2 = window.getComputedStyle(el2).transform;
+                el1.style.transform = transform2;
+                el2.style.transform = transform1;
+
+                window.requestAnimationFrame(function() {
+                    container.insertBefore(el1, el2.nextSibling);
+                    el1.style.transform = '';
+                    el2.style.transform = '';
+                    setTimeout(() => {
+                        resolve();
+                    }, speed);
+                });
+            });
+        }
+
+        async function bubbleSort() {
+            const container = document.getElementById('container');
+            const boxes = Array.from(container.children);
+            let n = boxes.length;
+            let swapped;
+
+            do {
+                swapped = false;
+                for (let i = 0; i < n - 1; i++) {
+                    const a = parseInt(boxes[i].textContent, 10);
+                    const b = parseInt(boxes[i + 1].textContent, 10);
+                    if (a > b) {
+                        await swapElements(boxes[i], boxes[i + 1]);
+                        swapped = true;
+                    }
+                }
+                n--; // Reduce the array length to optimize the sorting
+            } while (swapped);
+        }
+    </script>
+</body>
+</html>
