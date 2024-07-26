@@ -1,6 +1,6 @@
-let input_bar = document.querySelectorAll(".input_bars");
-let input_content_container = document.querySelectorAll(".input_content_container");
-let input_container = document.getElementById("input_container");
+const input_bar = document.querySelectorAll(".input_bars");
+const input_content_container = document.querySelectorAll(".input_content_container");
+const input_container = document.getElementById("input_container");
 
 function shuffleData(){
     for (let i = 0; i < input_bar.length; i++) {
@@ -53,13 +53,13 @@ async function swapElements(el1, el2) {
                 // Remove the highlight after the swap
                 el1.classList.remove('highlight');
                 el2.classList.remove('highlight');
-        
 
                 resolve();
             }, speed);
         });
     });
 }
+
 async function bubbleSort() {
     let boxes = Array.from(input_container.children);
     let n = boxes.length;
@@ -68,8 +68,8 @@ async function bubbleSort() {
     do {
         swapped = false;
         for (let i = 0; i < n - 1; i++) {
-            const a = parseInt(boxes[i].textContent, 10);
-            const b = parseInt(boxes[i + 1].textContent, 10);
+            const a = parseInt(boxes[i].textContent);
+            const b = parseInt(boxes[i + 1].textContent);
             if (a > b) {
                 await swapElements(boxes[i], boxes[i + 1]);
                 swapped = true;
@@ -78,4 +78,39 @@ async function bubbleSort() {
         }
         n--; // Reduce the array length to optimize the sorting
     } while (swapped);
+}
+
+const sortTitle = document.getElementById("sort_title")
+const sortLabel = document.getElementById("sort");
+
+// Add an event listener to the select element
+
+sortLabel.addEventListener('change', function() {
+    sortTitle.textContent = `${sortLabel.value} Sort: `
+})
+
+function sortData(){
+    switch (sortLabel.value) {
+        case "Bubble":
+            bubbleSort();
+            break;
+        case "Selection":
+            alert("WIP");
+            break;
+        case "Insertion":
+            alert("WIP");
+            break;
+        case "Quick":
+            alert("WIP");
+            break;
+        case "Counting":
+            alert("WIP");
+            break;
+        case "Radix":
+            alert("WIP");
+            break;
+        case "Merge":
+            alert("WIP");
+            break;
+    }
 }

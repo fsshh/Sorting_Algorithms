@@ -36,4 +36,5 @@ body{
 
 .highlight{
     background-color: orange;
+    transition: all .1s;
 }

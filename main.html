@@ -9,7 +9,7 @@
 </head>
 <body>
     <h2 style="text-align: center; padding-top: 10px;">Sorting Algorithms</h2>
-    <h1>Bubble Sort: </h1>
+    <h1 id="sort_title">Bubble Sort: </h1>
     <div id="input_container">
         <div class="input_bars">0</div>
         <div class="input_bars">1</div>
@@ -21,9 +21,26 @@
         <div class="input_bars">7</div>
         <div class="input_bars">8</div>
         <div class="input_bars">9</div>
+        <div class="input_bars">10</div>
+        <div class="input_bars">11</div>
+        <div class="input_bars">12</div>
+        <div class="input_bars">13</div>
+        <div class="input_bars">14</div>
     </div>
     <button type="button" onclick="shuffleData()">Shuffle Data</button>
-    <button type="button" onclick="bubbleSort()">Sort Data</button>
+    <button type="button" onclick="sortData()">Sort Data</button>
+
+    <label for="SortingAlgorithms">Sort:</label>
+    <select name="SortingAlgorithms" id="sort">
+        <option value="Bubble">Bubble Sort</option>
+        <option value="Selection">Selection Sort</option>
+        <option value="Insertion">Insertion Sort</option>
+        <option value="Quick">Quick Sort</option>
+        <option value="Counting">Counting Sort</option>
+        <option value="Radix">Radix Sort</option>
+        <option value="Merge">Merge Sort</option>
+    </select>
+
     <input type="range" min="100" max="2000" value="500" id="speedRange">
     <label for="speedRange">Speed: <span id="speedValue">500</span>ms</label>
 </body>
